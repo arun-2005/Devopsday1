@@ -4,19 +4,29 @@ name: hello
 # Event that triggers the workflow
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 # Jobs inside the workflow
 jobs:
 
-  # Job name
+  # First job
   greet:
     runs-on: ubuntu-latest
 
-    # Steps inside the job
     steps:
       - name: Say hello to users
         run: echo "Hello Dosto"
 
       - name: Say hello to user
         run: echo "Hello $USER"
+
+  # Second job
+  details:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show Python and Docker versions
+        run: |
+          docker --version
+          python --version
