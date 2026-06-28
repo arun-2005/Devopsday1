@@ -1,0 +1,22 @@
+# This is the workflow name
+name: hello
+
+# Event that triggers the workflow
+on:
+  push:
+    branches: [main]
+
+# Jobs inside the workflow
+jobs:
+
+  # Job name
+  greet:
+    runs-on: ubuntu-latest
+
+    # Steps inside the job
+    steps:
+      - name: Say hello to users
+        run: echo "Hello Dosto"
+
+      - name: Say hello to user
+        run: echo "Hello $USER"
