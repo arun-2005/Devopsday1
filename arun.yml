@@ -1,0 +1,14 @@
+name: Arun
+location: Pune
+dob: "22/03/2005"
+
+hobbies:
+  - workout
+  - teaching
+  - movies
+
+experience:
+  devops:
+    linux: 1
+    docker: 2
+    kubernetes: 3
