@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arun's Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #141a2d;
+      --text: #f5f7ff;
+      --accent: #4f8ef7;
+      --muted: #99a3c7;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at top, rgba(79, 142, 247, 0.16), transparent 32%),
+        linear-gradient(180deg, #0b1020 0%, #05070f 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      grid-template-columns: 1.3fr 1fr;
+      padding: 4rem 0 6rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.02;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-text {
+      max-width: 32rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.95rem 1.6rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .stats {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1rem 1.25rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+
+    section {
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .about-grid,
+    .projects-grid,
+    .skills-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: start;
+    }
+
+    .about-card,
+    .project-card,
+    .skill-card,
+    .contact-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.75rem;
+    }
+
+    .about-card p,
+    .project-card p,
+    .contact-card p {
+      color: var(--muted);
+    }
+
+    .project-card h4,
+    .skill-card h4 {
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .project-card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+      padding-left: 0;
+    }
+
+    .project-card li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+    }
+
+    .project-card li::before {
+      content: "•";
+      color: var(--accent);
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">ARUN PANDA</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="section-title">Full-Stack Developer</p>
+        <h1 class="hero-title">Building clean, modern web experiences for small businesses and startups.</h1>
+        <p class="hero-text">
+          I'm Arun, a developer who builds elegant user interfaces and scalable workflows. I design polished websites, create robust backend services, and automate deployment pipelines.
+        </p>
+        <a class="btn-primary" href="#contact">Let's build together</a>
+      </div>
+
+      <div class="hero-card">
+        <h3>Highlights</h3>
+        <p>Delivering production-ready web applications with responsive design, performance tuning, and cloud automation.</p>
+        <div class="stats">
+          <div class="stat">
+            <strong>10+</strong>
+            Projects completed
+          </div>
+          <div class="stat">
+            <strong>5</strong>
+            Years of experience
+          </div>
+          <div class="stat">
+            <strong>React</strong>
+            Frontend frameworks
+          </div>
+          <div class="stat">
+            <strong>Docker</strong>
+            Deployment pipelines
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <p class="section-title">About Me</p>
+      <div class="about-grid">
+        <div>
+          <h2>Crafting solutions that feel fast, intuitive, and reliable.</h2>
+          <p class="about-card">
+            I specialize in building web apps with strong UX, clean code, and automated delivery. My work spans from landing pages and dashboards to APIs and containerized deployments.
+          </p>
+        </div>
+        <div class="about-card">
+          <h4>What I do</h4>
+          <ul>
+            <li>Responsive UI development</li>
+            <li>Backend services with Node.js and Python</li>
+            <li>CI/CD and infrastructure automation</li>
+            <li>Performance optimization</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <p class="section-title">Selected Projects</p>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h4>Portfolio Dashboard</h4>
+          <p>A responsive React dashboard with reusable components, charts, and data filtering for client reporting.</p>
+          <ul>
+            <li>React + Tailwind CSS</li>
+            <li>REST API integration</li>
+            <li>Authentication and role-based access</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <h4>Marketplace CMS</h4>
+          <p>Built a content management portal for a marketplace using Node.js, Express, and PostgreSQL.</p>
+          <ul>
+            <li>Admin CRUD interfaces</li>
+            <li>Secure API endpoints</li>
+            <li>Automated deployment on Docker</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <h4>Landing Page</h4>
+          <p>Designed and shipped a marketing landing page with animation and fast load times for conversion growth.</p>
+          <ul>
+            <li>HTML5, CSS3, JavaScript</li>
+            <li>Mobile-first responsive layout</li>
+            <li>SEO-friendly structure</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <p class="section-title">Skills</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Frontend</h4>
+          <p>HTML, CSS, JavaScript, React, Vue</p>
+        </div>
+        <div class="skill-card">
+          <h4>Backend</h4>
+          <p>Node.js, Express, Python, Flask, REST APIs</p>
+        </div>
+        <div class="skill-card">
+          <h4>DevOps</h4>
+          <p>GitHub Actions, Docker, CI/CD, AWS</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <p class="section-title">Contact</p>
+      <div class="contact-card">
+        <h2>Let's work together</h2>
+        <p>Have a project idea or need a website upgrade? Reach out and let's create something great.</p>
+        <p>Email: <a href="mailto:arun@example.com" style="color: var(--accent); text-decoration: none;">arun@example.com</a></p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Arun Panda. Built with HTML and modern design principles.</p>
+    </footer>
+  </div>
+</body>
+</html>
