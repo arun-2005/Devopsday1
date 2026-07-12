@@ -1,47 +1,10 @@
-import os
-import logging
-from flask import Flask, send_from_directory, jsonify
-import yaml
+import re
+import sys
 
-app = Flask(__name__, static_folder='.', static_url_path='')
+def is_palindrome(s: str) -> bool:
+    s = re.sub(r'[^A-Za-z0-9]', '', s).lower()
+    return s == s[::-1]
 
-
-def load_profile():
-	"""Load profile data from arun.yml next to this script."""
-	base = os.path.dirname(__file__)
-	path = os.path.join(base, 'arun.yml')
-	try:
-		with open(path, 'r', encoding='utf-8') as f:
-			return yaml.safe_load(f)
-	except FileNotFoundError:
-		app.logger.warning('arun.yml not found at %s', path)
-		return {}
-	except Exception:
-		app.logger.exception('Failed to load arun.yml')
-		return {}
-
-
-@app.route('/')
-def index():
-	return send_from_directory('.', 'index.html')
-
-
-@app.route('/api/profile')
-def profile():
-	data = load_profile()
-	if not data:
-		return jsonify({'error': 'profile not found'}), 404
-	return jsonify(data)
-
-
-@app.route('/health')
-def health():
-	return jsonify({'status': 'ok'})
-
-
-if __name__ == '__main__':
-	logging.basicConfig(level=logging.INFO)
-	port = int(os.environ.get('PORT', 5000))
-	app.logger.info('Starting app on port %s', port)
-	app.run(host='0.0.0.0', port=port, debug=True)
-
+if __name__ == "__main__":
+    text = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else input("Enter text: ")
+    print("Palindrome" if is_palindrome(text) else "Not a palindrome")
