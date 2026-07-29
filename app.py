@@ -1,20 +1,25 @@
-import re
+import subprocess
 import sys
 
+def run_lint(path="."):
+    """Run flake8 lint checks on the given path (file or directory)."""
+    result = subprocess.run(
+        ["flake8", path, "--max-line-length=100", "--exclude=venv,__pycache__"],
+        capture_output=True,
+        text=True
+    )
 
-def is_palindrome(s: str) -> bool:
-    s = re.sub(r"[^A-Za-z0-9]", "", s).lower()
-    return s == s[::-1]
+    if result.stdout:
+        print(result.stdout)
+    if result.stderr:
+        print(result.stderr)
 
+    if result.returncode != 0:
+        print("❌ Lint check failed")
+        sys.exit(1)
+    else:
+        print("✅ Lint check passed")
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        text = " ".join(sys.argv[1:])
-    else:
-        text = input("Enter text: ")
-
-    print(
-        "Palindrome"
-        if is_palindrome(text)
-        else "Not a palindrome"
-    )
+    target = sys.argv[1] if len(sys.argv) > 1 else "."
+    run_lint(target)
